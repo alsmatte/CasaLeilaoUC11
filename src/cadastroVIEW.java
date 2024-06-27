@@ -1,4 +1,7 @@
 
+import javax.swing.JOptionPane;
+
+
 public class cadastroVIEW extends javax.swing.JFrame {
 
     /**
@@ -141,7 +144,17 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setStatus(status);
         
         ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
+        boolean ok;
+        ok = produtodao.cadastrarProduto(produto);
+        
+        if (ok = true) {
+        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+        cadastroNome.setText("");
+        cadastroValor.setText("");
+        }
+        else {
+        JOptionPane.showMessageDialog(this, "Falha ao cadastrar produto");
+        }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
