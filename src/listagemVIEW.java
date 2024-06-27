@@ -1,16 +1,8 @@
-
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Adm
- */
 public class listagemVIEW extends javax.swing.JFrame {
 
     /**
@@ -19,6 +11,27 @@ public class listagemVIEW extends javax.swing.JFrame {
     public listagemVIEW() {
         initComponents();
         listarProdutos();
+    }
+    
+     public void preencherTabela() {
+        ProdutosDAO produtosdao = new ProdutosDAO();
+        ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+
+        DefaultTableModel tabela = (DefaultTableModel) listaProdutos.getModel();
+        listaProdutos.setRowSorter(new TableRowSorter(tabela));
+        tabela.setNumRows(0);
+
+        for (ProdutosDTO i : listagem) {
+            Object[] obj = new Object[]{
+		i.getId(),
+                i.getNome(),
+                i.getValor(),
+                i.getStatus()
+
+            };
+            tabela.addRow(obj);
+        }
+        
     }
 
     /**
