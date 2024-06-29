@@ -1,3 +1,8 @@
+
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,8 +19,30 @@ public class vendasVIEW extends javax.swing.JFrame {
      */
     public vendasVIEW() {
         initComponents();
+        preencherTabela();
     }
 
+    public void preencherTabela() {
+        ProdutosDAO produtosdao = new ProdutosDAO();
+        ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutosVendidos();
+
+        DefaultTableModel tabela = (DefaultTableModel) tblVendidos.getModel();
+        tblVendidos.setRowSorter(new TableRowSorter(tabela));
+        tabela.setNumRows(0);
+
+        for (ProdutosDTO i : listagem) {
+            Object[] obj = new Object[]{
+		i.getId(),
+                i.getNome(),
+                i.getValor(),
+                i.getStatus()
+
+            };
+            tabela.addRow(obj);
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
