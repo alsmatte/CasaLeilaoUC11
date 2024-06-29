@@ -99,6 +99,24 @@ public class ProdutosDAO {
 
     }
     
+    public void venderProduto(ProdutosDTO selecionado){
+        
+        conn = new conectaDAO().connectDB();
+        String sql = "UPDATE produtos SET status LIKE 'Vendido' " + "WHERE id = ?";
+        
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, selecionado.getId());
+
+            stmt.execute();
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao efetuar venda " + e.getMessage());
+        }
+        
+    
+    }
+    
     
     
         
