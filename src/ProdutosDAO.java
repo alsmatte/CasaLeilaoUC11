@@ -99,14 +99,14 @@ public class ProdutosDAO {
 
     }
     
-    public void venderProduto(ProdutosDTO selecionado){
+    public void venderProduto(String id){
         
         conn = new conectaDAO().connectDB();
-        String sql = "UPDATE produtos SET status LIKE 'Vendido' " + "WHERE id = ?";
+        String sql = "UPDATE produtos SET status = 'Vendido' " + "WHERE id = ?";
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
-            stmt.setInt(1, selecionado.getId());
+            stmt.setString(1, id);
 
             stmt.execute();
             
